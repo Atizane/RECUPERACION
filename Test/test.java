@@ -1,10 +1,11 @@
+package Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import Arbol.ArbolBinario;
+import Arbol.Nodo;
 
-// import ARBOLESyo.arbolbinario.ArbolBinario;
-// import ARBOLESyo.arbolbinario.Nodo;
 
 public class test {
     public static void main(String[] args) throws NumberFormatException, IOException {

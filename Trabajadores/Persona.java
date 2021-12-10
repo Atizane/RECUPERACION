@@ -1,4 +1,4 @@
-package TRABAJADORES;
+package Trabajadores;
 
 public class Persona {
     private String nombre;

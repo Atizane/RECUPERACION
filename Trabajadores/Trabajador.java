@@ -1,4 +1,4 @@
-package TRABAJADORES;
+package Trabajadores;
 
 public class Trabajador extends Persona{
         private String id;

@@ -1,3 +1,4 @@
+package Arbol;
 
 public class Nodo {
     protected Object dato;

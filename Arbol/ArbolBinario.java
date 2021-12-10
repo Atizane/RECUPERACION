@@ -1,4 +1,4 @@
-
+package Arbol;
 
 public class ArbolBinario {
     protected Nodo raiz;
