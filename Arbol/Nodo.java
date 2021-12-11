@@ -1,22 +1,25 @@
 package Arbol;
 
+import Trabajadores.Trabajador;
+
 public class Nodo {
-    protected Object dato;
+
+    protected Trabajador dato;
     protected Nodo izq;
     protected Nodo der;
     
-    public Nodo(Object valor) {
+    public Nodo (Trabajador valor) {
         this.dato = valor;
         this.izq = null;
         this.der = null;
     }
     
-    public Nodo(Nodo ramaIzdo, Object valor, Nodo ramaDcho) {
+    public Nodo(Nodo ramaIzdo, Trabajador valor, Nodo ramaDcho) {
         dato = valor;
         izq = ramaIzdo;
         der = ramaDcho;
     }
-    public Object valorNodo() {
+    public Trabajador valorNodo() {
         return dato;
     }
     public Nodo subarbolIzdo() {
@@ -25,7 +28,7 @@ public class Nodo {
     public Nodo subarbolDecho() {
         return der;
     }
-    public void nuevoValor(Object valor) {
+    public void nuevoValor (Trabajador valor) {
         this.dato = valor;
     }
     public void ramaIzdo(Nodo izq) {
