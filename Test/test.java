@@ -5,26 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
-
 import Arbol.ArbolBinario;
 import Arbol.Nodo;
 import Trabajadores.Trabajador;
 
 public class test {
     public static void main(String[] args) throws NumberFormatException, IOException {
+        try{
         BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in));
             ArrayList <Integer> idLista = new ArrayList<Integer>();
 
         ArbolBinario nuevoArbol = new ArbolBinario();
         nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 5,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 3,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 8,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 4,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 1,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 9,1100, "Empleado"));
-        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 6,1100, "Empleado"));
-        System.out.println("Arbol creado...\n");
+        nuevoArbol.agregarNodo(new Trabajador("Fabiola", "Viñeyra", "Rodriguez", 26, "Femenino", 3,1500, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Alejandro", "Viñeyra", "Rodriguez", 24, "Masculino", 8,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Andres", "Viñeyra", "Rodriguez", 20, "Masculino", 4,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ariana", "Viñeyra", "Rodriguez", 27, "Femenino", 1,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Antonio", "Viñeyra", "Gonzalez", 45, "Masculino", 9,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Eduardo", "Rodriguez", "Quintero", 78, "Masculino", 6,1100, "Empleado"));
         boolean control = true;
         do {
           menu();
@@ -53,7 +52,8 @@ public class test {
                 case 2:
                 System.out.println("¿Que trabajador desea modificar?");
                 int datoBusqueda = Integer.parseInt(br.readLine());
-                Trabajador m = nuevoArbol.busqueda(datoBusqueda).valorNodo();
+                Trabajador m = null;
+                if(nuevoArbol.busqueda(datoBusqueda) != null) m = nuevoArbol.busqueda(datoBusqueda).valorNodo();
 
                 if (m != null){
                     System.out.println("¿Que campo desea modificar?");
@@ -109,6 +109,10 @@ public class test {
                 case 4: System.out.println("Introduce el ID que desea eliminar:");
                 int idAux = Integer.parseInt(br.readLine());
                 if (nuevoArbol.busqueda(idAux) != null){
+                    System.out.println("Estas seguro que desea eliminar el ID" + idAux);
+                    System.out.println("1.- Si\n2.- No");
+                    opcion = Integer.parseInt(br.readLine());
+                    if (opcion == 1)
                     nuevoArbol.eliminar(idAux);
                 }
                 break;
@@ -122,11 +126,13 @@ public class test {
                 break;
         }  
         } while (control);
-        
+    }
+    catch(Exception e){
+        System.out.println("La opcion que desea utilizar no es correcto.");
+    }
+    
     }
     public static void menu(){
         System.out.println("*****************BIENVENIDO***********\n ¿Qué desea hacer?\n1.-Consultar Trabajadores\n2.-Modificar Trabajador \n3.-Agregar Trabajador\n4.-Eliminar Trabajador\n5.-SALIRl");
-
     }
-
 }

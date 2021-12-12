@@ -61,11 +61,10 @@ public class ArbolBinario {
                 aux = aux.der;
             }
             if(aux ==null){
-                System.out.println("ID incorrecto, vuelva a intentarlo");
+                System.out.println("Dato no encontrado");
                    return null;
             }
         }
-        System.out.println("Dato encontrado");
         return aux;
     }
 
