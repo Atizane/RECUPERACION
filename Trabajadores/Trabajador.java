@@ -1,12 +1,12 @@
 package Trabajadores;
 
 public class Trabajador extends Persona{
-        private String id;
+        private int id;
         private double sueldo;
         private String puesto;
         
         public Trabajador(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String genero,
-                String id, double sueldo, String puesto) {
+                int id, double sueldo, String puesto) {
             super(nombre, apellidoPaterno, apellidoMaterno, edad, genero);
             this.id = id;
             this.sueldo = sueldo;
@@ -15,7 +15,7 @@ public class Trabajador extends Persona{
 
         
         public Trabajador(){
-            this.id = "";
+            this.id = 0;
             this.sueldo = 0;
             this.puesto = "";
         }
@@ -25,11 +25,11 @@ public class Trabajador extends Persona{
         //         this.sueldo = t.getSueldo();
         //         this.puesto= t.getPuesto();
         // }
-        public String getId() {
+        public int getId() {
                 return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
                 this.id = id;
         }
 

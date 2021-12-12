@@ -3,16 +3,27 @@ package Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Random;
+
 import Arbol.ArbolBinario;
 import Arbol.Nodo;
-
+import Trabajadores.Trabajador;
 
 public class test {
     public static void main(String[] args) throws NumberFormatException, IOException {
         BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in));
+            ArrayList <Integer> idLista = new ArrayList<Integer>();
 
         ArbolBinario nuevoArbol = new ArbolBinario();
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 5,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 3,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 8,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 4,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 1,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 9,1100, "Empleado"));
+        nuevoArbol.agregarNodo(new Trabajador("Ricardo", "Viñeyra", "Rodriguez", 24, "Masculino", 6,1100, "Empleado"));
         System.out.println("Arbol creado...\n");
         boolean control = true;
         do {
@@ -40,43 +51,69 @@ public class test {
                 control = true;
                 break;
                 case 2:
-                System.out.println("Ingrese el nodo que desea buscar");
+                System.out.println("¿Que trabajador desea modificar?");
                 int datoBusqueda = Integer.parseInt(br.readLine());
-                nuevoArbol.busqueda(datoBusqueda);
+                Trabajador m = nuevoArbol.busqueda(datoBusqueda).valorNodo();
+
+                if (m != null){
+                    System.out.println("¿Que campo desea modificar?");
+                    System.out.println("1.- Nombre\n 2. Apellido Paterno\n 3.- Apellido Materno\n 4.- Edad\n 5.- Genero\n 6.- Sueldo\n 7.- Puesto\n");
+                    opcion = Integer.parseInt(br.readLine());
+                    String newDato = "";
+                    int newEdad = 0;
+                    Double newSueldo = 0.0;
+
+                    System.out.println("Introduce el nuevo dato.");
+
+                    if (opcion == 1||opcion == 2||opcion == 3 || opcion == 5|| opcion == 7) newDato = (br.readLine());
+                    else if (opcion == 4) newEdad = Integer.parseInt(br.readLine());
+                    else if (opcion == 6) newSueldo = Double.parseDouble(br.readLine());
+
+                    switch (opcion)
+                    {
+                        case 1: m.setNombre(newDato); break;
+                        case 2: m.setApellidoPaterno(newDato); break;
+                        case 3: m.setApellidoMaterno(newDato); break;
+                        case 4: m.setEdad(newEdad); break;
+                        case 5: m.setGenero(newDato); break;
+                        case 6: m.setSueldo(newSueldo); break;
+                        case 7: m.setPuesto(newDato); break;
+                    }
+                }
                 System.out.println("----------------");
                 break;
-                case 3:
-                System.out.println("Ingrese el valor que le gustaría agregar al árbol: ");
-                int i = Integer.parseInt(br.readLine());
-                nuevoArbol.agregarNodo(i, nuevoArbol);
+                case 3://(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String genero,
+                //String id, double sueldo, String puesto)
+                System.out.println("Ingrese el nombre del Trabajador: ");
+                String nombre = (br.readLine());
+                System.out.println("Ingrese el apellido paterno:");
+                String apellidoPaterno = (br.readLine());
+                System.out.println("Ingrese el apellido materno:");
+                String apellidoMaterno = (br.readLine());
+                System.out.println("Ingrese su edad actual:");
+                int edad = Integer.parseInt(br.readLine());
+                System.out.println("Masculino o Femenino:");
+                String genero = (br.readLine());
+                System.out.println("Sueldo:");
+                double sueldo = Double.parseDouble(br.readLine());
+                System.out.println("Puesto:");
+                String puesto = (br.readLine());
+
+                Random x = new Random();
+                int id = 1000 + x.nextInt(8999);
+                while(idLista.contains(id)) id = 1000 + x.nextInt(8999);
+
+                nuevoArbol.agregarNodo(new Trabajador(nombre, apellidoPaterno, apellidoMaterno, edad, genero, id, sueldo, puesto));
+                break;
+
+                case 4: System.out.println("Introduce el ID que desea eliminar:");
+                int idAux = Integer.parseInt(br.readLine());
+                if (nuevoArbol.busqueda(idAux) != null){
+                    nuevoArbol.eliminar(idAux);
+                }
                 break;
                 
                 case 5:
-                boolean decision = true;
-                while(decision){
-                System.out.println("Ingrese los valores del nodo: ");
-                int f = Integer.parseInt(br.readLine());
-                nuevoArbol.agregarNodo(f, nuevoArbol);
-                System.out.println("¡agregado!\n ¿Desea agregar otro?\tsi, no");  
-                String leer = br.readLine();
-
-                switch (leer) {
-                    case "si":
-                        decision = true;
-                        break;
-                    case "no":
-                        decision = false;
-                    break;
-                    default:
-                    System.out.println("Ingrese la respuesta correcta");
-                        break;
-                }
-                System.out.println("----------------");  
-                }
-                System.out.println("------------------");
-                break;
-                
-                case 7:
                 System.out.println("**************ADIOS************");
                 control = false;
                 break;
@@ -88,7 +125,7 @@ public class test {
         
     }
     public static void menu(){
-        System.out.println("*****************BIENVENIDO***********\n ¿Qué desea hacer?\n1.- Ver arbol\n2.-Buscar nodo\n3.-Agregar nodos al arbol\n5.- Crear árbol\n7.-SALIRl");
+        System.out.println("*****************BIENVENIDO***********\n ¿Qué desea hacer?\n1.-Consultar Trabajadores\n2.-Modificar Trabajador \n3.-Agregar Trabajador\n4.-Eliminar Trabajador\n5.-SALIRl");
 
     }
 

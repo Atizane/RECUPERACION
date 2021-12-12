@@ -1,5 +1,7 @@
 package Arbol;
 
+import Trabajadores.Trabajador;
+
 public class ArbolBinario {
     protected Nodo raiz;
     public ArbolBinario() {
@@ -19,29 +21,20 @@ public class ArbolBinario {
     }
 
     public static Nodo nuevoArbol(Nodo ramaIzdo, Object valor, Nodo ramaDcho) {
-        return new Nodo(ramaIzdo, valor, ramaDcho);
-    }    
+        return new Nodo(ramaIzdo, (Trabajador) valor, ramaDcho);
+    }
    
     public void inOrden(Nodo r){
         if (r!= null){
             inOrden(r.izq);
-            System.out.println("Dato: "+ r.dato);
+            System.out.println("Dato: "+ r.dato.toString());
             inOrden(r.der);
         }
     }
 
-    public void inOrdenArbol(Nodo r){
-        if (r!= null){
-            inOrden(r.izq);
-            this.agregarNodo(r, this);
-            inOrden(r.der);
-        }
-    }
-
-   
     public void preOrden (Nodo r){
         if((Nodo)r!= null){
-            System.out.println("Dato: "+r.dato);
+            System.out.println("Dato: "+r.dato.toString());
             preOrden(r.izq);
             preOrden(r.der);
         }
@@ -51,7 +44,7 @@ public class ArbolBinario {
         if(r!= null){
             postOrden(r.izq);
             postOrden(r.der);
-            System.out.println("Dato: "+r.dato);
+            System.out.println("Dato: "+r.dato.toString());
         }
     }
 
@@ -60,15 +53,15 @@ public class ArbolBinario {
    
         Nodo aux = this.raiz;
    
-        while(Integer.parseInt((aux.dato).toString())!= datoBusqueda)
+        while(aux.dato.getId() != datoBusqueda)
         {
-            if(datoBusqueda<Integer.parseInt((aux.dato).toString())){
+            if(datoBusqueda < aux.dato.getId()){
                 aux = aux.izq;
             }else{
                 aux = aux.der;
             }
             if(aux ==null){
-                System.out.println("Dato no encontrado");
+                System.out.println("ID incorrecto, vuelva a intentarlo");
                    return null;
             }
         }
@@ -76,8 +69,8 @@ public class ArbolBinario {
         return aux;
     }
 
-    public void agregarNodo(Object elemento, ArbolBinario busqueda){
-        Nodo nuevo = new Nodo(elemento);
+    public void agregarNodo(Trabajador elemento){
+        Nodo nuevo = new Nodo((Trabajador) elemento);
        if(raiz == null){
             raiz = nuevo;
         }else{
@@ -85,7 +78,7 @@ public class ArbolBinario {
             Nodo papa;
              while(true){
                 papa = aux;
-                if(Integer.parseInt((elemento).toString())<Integer.parseInt((aux.dato).toString())){
+                if(elemento.getId()< aux.dato.getId()) {
                     //Apunta a la izquierda
                     aux = aux.izq;
                     if(aux == null){
@@ -102,6 +95,24 @@ public class ArbolBinario {
 
             }
 
+        }
+    }
+    
+    public void eliminar(int id){
+        Nodo x = busqueda(id);
+        x.dato = null;
+        Nodo aux = new Nodo(this.raiz.izq, this.raiz.dato, this.raiz.der);
+        this.raiz = null;  
+        eliminarAux(aux);    
+    }
+    
+    public void eliminarAux(Nodo elAux){
+        if (elAux != null){
+            eliminarAux(elAux.izq);
+            if (elAux.dato != null) {
+                agregarNodo(elAux.dato);
+            }
+            eliminarAux(elAux.der);
         }
     }
 }
