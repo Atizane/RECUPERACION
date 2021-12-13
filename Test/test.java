@@ -30,7 +30,7 @@ public class test {
 
         switch (opcion) {
             case 1:
-                System.out.println("Ingrese la manera en que desea ver el árbol binario de busqueda.\n 1)RID\n 2)IRD\n 3)IDR\n");
+                System.out.println("Ingrese la manera en que desea ver la lista de Trabajadores.\n 1)RID\n 2)IRD\n 3)IDR\n");
                 int opcion2 = Integer.parseInt(br.readLine());
                 switch (opcion2) {
                     case 1:
