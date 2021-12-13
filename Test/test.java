@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 import Arbol.ArbolBinario;
-import Arbol.Nodo;
 import Trabajadores.Trabajador;
 
 public class test {
@@ -45,7 +44,7 @@ public class test {
                     break;
                     default:
                     System.out.println("Ingrese una opcion valida");
-                        break;
+                    break;
                 }
                 control = true;
                 break;
@@ -82,8 +81,7 @@ public class test {
                 }
                 System.out.println("----------------");
                 break;
-                case 3://(String nombre, String apellidoPaterno, String apellidoMaterno, int edad, String genero,
-                //String id, double sueldo, String puesto)
+                case 3:
                 System.out.println("Ingrese el nombre del Trabajador: ");
                 String nombre = (br.readLine());
                 System.out.println("Ingrese el apellido paterno:");
@@ -109,16 +107,17 @@ public class test {
                 case 4: System.out.println("Introduce el ID que desea eliminar:");
                 int idAux = Integer.parseInt(br.readLine());
                 if (nuevoArbol.busqueda(idAux) != null){
-                    System.out.println("Estas seguro que desea eliminar el ID" + idAux);
+                    System.out.println("Estas seguro que desea eliminar el ID #" + idAux);
                     System.out.println("1.- Si\n2.- No");
                     opcion = Integer.parseInt(br.readLine());
                     if (opcion == 1)
                     nuevoArbol.eliminar(idAux);
+                    System.out.println("Consulta tu lista actualizada...");
                 }
                 break;
                 
                 case 5:
-                System.out.println("**************ADIOS************");
+                System.out.println("******** HASTA LUEGO...*********");
                 control = false;
                 break;
             default:
@@ -133,6 +132,7 @@ public class test {
     
     }
     public static void menu(){
-        System.out.println("*****************BIENVENIDO***********\n ¿Qué desea hacer?\n1.-Consultar Trabajadores\n2.-Modificar Trabajador \n3.-Agregar Trabajador\n4.-Eliminar Trabajador\n5.-SALIRl");
+        System.out.println("********** BIENVENIDO **********\n ¿Qué desea hacer?\n1.-Consultar Trabajadores\n2.-Modificar Trabajador \n3.-Agregar Trabajador\n4.-Eliminar Trabajador\n5.-SALIRl");
+        System.out.println("********************************");
     }
 }
